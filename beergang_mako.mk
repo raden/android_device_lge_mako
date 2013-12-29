@@ -17,26 +17,24 @@
 # Sample: This is where we'd set a backup provider if we had one
 # $(call inherit-product, device/sample/products/backup_overlay.mk)
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        LiveWallpapers \
-        LiveWallpapersPicker \
-        VisualizationWallpapers
-
-
-# Get the long list of APNs
-PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
-
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-PRODUCT_NAME := full_mako
-PRODUCT_DEVICE := mako
-PRODUCT_BRAND := Android
-PRODUCT_MODEL := Nexus 4
-PRODUCT_MANUFACTURER := LGE
-PRODUCT_RESTRICT_VENDOR_FILES := true
+# Inherit from our custom product configuration
+$(call inherit-product, vendor/beergang/products/common.mk)
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/lge/mako/device.mk)
-$(call inherit-product-if-exists, vendor/lge/mako/mako-vendor.mk)
+
+PRODUCT_NAME := beergang_mako
+PRODUCT_DEVICE := mako
+PRODUCT_BRAND := google
+PRODUCT_MODEL := Nexus 4
+PRODUCT_MANUFACTURER := LGE
+
+# Kernel inline build
+TARGET_KERNEL_CONFIG := mako_defconfig
+TARGET_VARIANT_CONFIG := mako_defconfig
+TARGET_SELINUX_CONFIG := mako_defconfig
+
+$(call inherit-product-if-exists, vendor/lge/mako/device-vendor.mk)

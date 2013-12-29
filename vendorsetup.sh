@@ -13,5 +13,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-add_lunch_combo aosp_mako-userdebug
+add_lunch_combo beergang_mako-userdebug
